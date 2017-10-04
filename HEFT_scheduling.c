@@ -227,7 +227,7 @@ void make_schedule()
             for(j=0;j<no_machines;j++)
             {
             	calculate_EST_EFT(task,j,EST_EFT);
-            	printf("%lf %lf %ld\n",EST_EFT->AST,EST_EFT->AFT,EST_EFT->processor);
+            	//printf("\n%lf %lf %ld\n",EST_EFT->AST,EST_EFT->AFT,EST_EFT->processor);
             	if(min_EFT>(EST_EFT->AFT))
             	{
             		schedule[task]=*EST_EFT;
@@ -236,8 +236,8 @@ void make_schedule()
             }
         }
       
-        printf("Task scheduled %ld\n",task);
-        printf("%ld %lf %lf\n",schedule[task].processor,schedule[task].AST,schedule[task].AFT);
+      //  printf("\nTask scheduled %ld\n",task);
+      //  printf("%ld %lf %lf\n",schedule[task].processor,schedule[task].AST,schedule[task].AFT);
      }
 }
 
@@ -246,11 +246,12 @@ void make_schedule()
 ********************************************************/
 void display_schedule()
 {
-	long i;
+	long i,j;
 	printf("\n\nSCHEDULE\n\n");
 	for(i=0;i<no_tasks;i++)
 	{
-		printf("TASK :%ld PROCESSOR :%ld AST :%lf AFT :%lf\n",i+1,schedule[i].processor+1,schedule[i].AST,schedule[i].AFT);
+		j=sorted_tasks[i];
+		printf("TASK :%ld PROCESSOR :%ld AST :%lf AFT :%lf\n",j+1,schedule[j].processor+1,schedule[j].AST,schedule[j].AFT);
 	}
 }
 
@@ -301,11 +302,12 @@ long main()
             		insertlongo(i,tasks_upper_rank[i]);
         	}
 	}
-    	printf("UPPER RANKS OF TASKS :\n\n");
+    	printf("\n\tUPPER RANKS OF TASKS :\n");
 	for(i=0;i<no_tasks;i++)
         	printf("TASK NO. %ld: %.2lf\n",i,tasks_upper_rank[i]);
+    printf("\n\tSCHEDULE ORDER\n");
     	for(i=0;i<no_tasks;i++)
-        	printf("TASK NO. : %ld\n",sorted_tasks[i]);
+        	printf("TASK NO. : %ld\n",sorted_tasks[i]+1);
     	make_schedule();
     	display_schedule();
     	scanf("%ld",&i);
