@@ -1,0 +1,84 @@
+
+
+Graph # 1 
+n=70, alpha=2.000000,CC Ratio=10.000000 ,Average Computational Cost=40,	height=4 
+
+
+width of level 1=13
+width of level 2=1
+width of level 3=10
+width of level 4=9
+
+Final number of vertices=21
+
+outdegree of 1=1
+outdegree of 2=9
+outdegree of 3=4
+outdegree of 4=5
+outdegree of 5=6
+outdegree of 6=7
+outdegree of 7=4
+outdegree of 8=6
+outdegree of 9=4
+outdegree of 10=1
+outdegree of 11=6
+outdegree of 12=6
+outdegree of 13=0
+outdegree of 14=0
+outdegree of 15=0
+outdegree of 16=0
+outdegree of 17=0
+outdegree of 18=0
+outdegree of 19=0
+outdegree of 20=0
+outdegree of 21=0
+
+Computation matrix is
+
+---------	*Pr1*	*Pr2*	
+Task # 1	42	50	
+Task # 2	75	71	
+Task # 3	61	79	
+Task # 4	51	65	
+Task # 5	21	55	
+Task # 6	63	69	
+Task # 7	19	67	
+Task # 8	58	33	
+Task # 9	3	32	
+Task # 10	60	11	
+Task # 11	44	49	
+Task # 12	41	61	
+Task # 13	52	69	
+Task # 14	48	3	
+Task # 15	13	44	
+Task # 16	10	37	
+Task # 17	47	46	
+Task # 18	20	11	
+Task # 19	79	19	
+Task # 20	35	38	
+Task # 21	26	68	
+
+Communictaion matrix is
+
+--From / To---	#1	#2	#3	#4	#5	#6	#7	#8	#9	#10	#11	#12	#13	#14	#15	#16	#17	#18	#19	#20	#21	
+From Task # 1	-1	73	-1	-1	221	-1	-1	-1	-1	58	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	
+From Task # 2	-1	-1	34	-1	80	216	3	390	69	-1	-1	-1	-1	247	105	-1	227	311	-1	-1	-1	
+From Task # 3	-1	-1	-1	124	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	220	310	391	-1	-1	-1	
+From Task # 4	-1	-1	-1	-1	43	-1	-1	-1	-1	-1	-1	-1	347	-1	47	-1	-1	-1	-1	317	-1	
+From Task # 5	-1	-1	-1	-1	-1	155	-1	-1	-1	-1	-1	-1	-1	168	6	271	288	83	-1	47	-1	
+From Task # 6	-1	-1	-1	-1	-1	-1	361	-1	-1	-1	-1	-1	392	376	-1	-1	168	361	68	-1	-1	
+From Task # 7	-1	-1	-1	-1	-1	-1	-1	98	-1	-1	-1	-1	136	365	-1	-1	-1	-1	54	387	-1	
+From Task # 8	-1	-1	-1	-1	-1	-1	-1	-1	26	-1	-1	-1	373	327	-1	-1	6	381	226	-1	-1	
+From Task # 9	-1	-1	-1	-1	-1	-1	-1	-1	-1	79	-1	-1	279	366	-1	11	-1	160	-1	-1	-1	
+From Task # 10	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	164	-1	-1	350	-1	-1	14	-1	-1	-1	-1	
+From Task # 11	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	167	19	292	327	91	-1	-1	205	199	-1	
+From Task # 12	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	40	-1	-1	164	282	70	-1	-1	-1	
+From Task # 13	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	266	-1	-1	-1	-1	-1	-1	-1	
+From Task # 14	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	112	-1	-1	-1	-1	-1	-1	
+From Task # 15	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	250	-1	-1	-1	-1	-1	
+From Task # 16	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	59	-1	-1	-1	-1	
+From Task # 17	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	391	-1	-1	-1	
+From Task # 18	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	78	-1	-1	
+From Task # 19	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	267	-1	
+From Task # 20	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	
+From Task # 21	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	-1	

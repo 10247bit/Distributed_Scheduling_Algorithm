@@ -1,15 +1,14 @@
 /*******************************************************
-	    HEFT DUPLICATION IMPLEMENTATION
+	    CPOP IMPLEMENTATION
 ********************************************************/
 //NOTES
-//UPPER RANK ARRAY(tasks_upper_rank[]) INITIALIZED TO -1 SO AS TO PREVENT REDUNDANT CALCULATION OF UPPER RANKS
 //COMMUNICATION COST MATRIX(data[][]) HAS -1 VALUE FOR NON COMMUNICATING TASKS
 
 
 #include<stdio.h>
 #include<stdlib.h>
 long no_tasks,no_machines; 
-double **computation_costs,**data_transfer_rate,**data,*tasks_upper_rank;
+double **computation_costs,**data_transfer_rate,**data,*tasks_upper_rank,*tasks_lower_rank,*priority,*CriticalPath,LengthOfCriticalPath;//change 1
 long *sorted_tasks;
 struct TaskProcessor
 {
@@ -45,8 +44,43 @@ double avg_communicationcost(long source,long destination)
              if(data_transfer_rate[i][j]!=0)
              	avg+=(data[source][destination]/data_transfer_rate[i][j]);
           }}
-       avg=avg/(no_machines*no_machines-no_machines);
+        double nmac=(double)(no_machines*no_machines-no_machines);
+       avg=avg/nmac;
        return avg;
+}
+//change 3
+double calculate_lower_rank(long task)
+{
+  long j,i;
+  double avg_communication_cost,predecessor,avg=0.0,max=0.0,rank_predecessor;
+    
+    for(j=no_tasks-1;j>=0;j--)
+    {
+        if(data[j][task]!=-1)             //check if a successor
+        {
+           avg_communication_cost=avg_communicationcost(j,task);
+
+           for(i=0;i<no_machines;i++)
+              avg+=computation_costs[j][i];
+            avg/=no_machines;
+
+
+           if(tasks_lower_rank[j]==-1)
+           {
+              if(j==0)
+                rank_predecessor=tasks_lower_rank[j]=0.0;
+              else
+                rank_predecessor= tasks_lower_rank[j]= calculate_lower_rank(j);
+              //insertlongo(j,rank_successor);
+           }
+           else
+               rank_predecessor= tasks_lower_rank[j];     
+           predecessor=avg_communication_cost+rank_predecessor+avg;
+           if(max<=predecessor)
+              max=predecessor;
+        }
+     }
+     return max;
 }
 
 double calculate_upper_rank(long task)
@@ -274,8 +308,12 @@ long main()
 	for(i=0;i<no_tasks;i++)
     	data[i]=(double*)calloc(no_tasks,sizeof(double));
 	tasks_upper_rank=(double *)calloc(no_tasks,sizeof(double));
+  tasks_lower_rank=(double *)calloc(no_tasks,sizeof(double));//change2
 	for(i=0;i<no_tasks;i++)
+       {
         tasks_upper_rank[i]=-1;
+        tasks_lower_rank[i]=-1;
+       }
     	sorted_tasks=(long *)calloc(no_tasks,sizeof(long));
     	schedule=(struct TaskProcessor*)calloc(no_tasks,sizeof(struct TaskProcessor));
     	for(i=0;i<no_tasks;i++)
@@ -292,6 +330,15 @@ long main()
 	for(i=0;i<no_tasks;i++)
 	for(j=0;j<no_tasks;j++)
 		fscanf(fp,"%lf",&data[i][j]);
+
+
+
+  //Allocating the memory to the Priority(Upper Rank + Lower Rank):
+
+  priority=(double*)calloc(no_tasks,sizeof(double));
+
+  // Allocating the memory to CriticalPath(One  which takes the highest time in the graph)
+  CriticalPath=(double*)calloc(no_tasks,sizeof(double));
 	//calculate upper rank
 	for(i=0;i<no_tasks;i++)
 	{
@@ -301,9 +348,40 @@ long main()
             		insertlongo(i,tasks_upper_rank[i]);
         	}
 	}
+
+    //change 4
+  for(i=no_tasks-1;i>=0;i--)
+  {
+    if(tasks_lower_rank[i]==-1)
+    {
+      tasks_lower_rank[i]=calculate_lower_rank(i);
+    }
+
+  }
+
+    printf("\n\nLower RANKS OF TASKS :\n\n");
+  for(i=0;i<no_tasks;i++)
+          printf("TASK NO. %ld: %.3lf\n",i,tasks_lower_rank[i]);
+
+
     	printf("UPPER RANKS OF TASKS :\n\n");
 	for(i=0;i<no_tasks;i++)
-        	printf("TASK NO. %ld: %.2lf\n",i,tasks_upper_rank[i]);
+        	printf("TASK NO. %ld: %.3lf\n",i,tasks_upper_rank[i]);
+
+
+  for( i=0;i<no_tasks;++i)
+  {
+
+    priority[i]=tasks_upper_rank[i]+tasks_lower_rank[i];
+    printf("TASK NO. %ld: %.3lf\n",i,priority[i]);
+
+  }
+
+
+  //Critical_path
+  // var(s) needed are 'LengthOfCriticalPath' and CriticalSet
+    LengthOfCriticalPath=priority[0];
+
     	for(i=0;i<no_tasks;i++)
         	printf("TASK NO. : %ld\n",sorted_tasks[i]);
     	make_schedule();
